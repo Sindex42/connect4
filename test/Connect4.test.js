@@ -24,7 +24,7 @@ describe('Connect4', () => {
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
-          ['0', ' ', ' ', ' ', ' ', ' ']
+          [1, ' ', ' ', ' ', ' ', ' ']
       ]);
     });
 
@@ -38,8 +38,65 @@ describe('Connect4', () => {
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
           [' ', ' ', ' ', ' ', ' ', ' '],
-          ['0', ' ', ' ', ' ', ' ', ' '],
-          ['0', ' ', ' ', ' ', ' ', ' ']
+          [2, ' ', ' ', ' ', ' ', ' '],
+          [1, ' ', ' ', ' ', ' ', ' ']
       ]);
+    });
+
+    test('game is won if 4 of the same tokens are connected horizontally', () => {
+      const connect4 = new Connect4();
+
+      connect4.selectColumn(1, 1);
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(3, 1);
+      connect4.selectColumn(4, 1);
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [1, 1, 1, 1, ' ', ' ']
+      ]);
+      expect(connect4.winState).toEqual(true)
+    });
+
+    test('horizontal win, one over', () => {
+      const connect4 = new Connect4();
+
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(3, 1);
+      connect4.selectColumn(4, 1);
+      connect4.selectColumn(5, 1);
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', 1, 1, 1, 1, ' ']
+      ]);
+      expect(connect4.winState).toEqual(true)
+    });
+
+    test('no horizontal win, gap in the row', () => {
+      const connect4 = new Connect4();
+
+      connect4.selectColumn(2, 1);
+      connect4.selectColumn(4, 1);
+      connect4.selectColumn(5, 1);
+      connect4.selectColumn(6, 1);
+
+      expect(connect4.board).toEqual([
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', ' ', ' ', ' ', ' ', ' '],
+          [' ', 1, ' ', 1, 1, 1]
+      ]);
+      expect(connect4.winState).toEqual(false)
     });
 });
