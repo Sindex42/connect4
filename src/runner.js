@@ -33,8 +33,11 @@ while (app.inProgress) {
   clearScreen()
   try {
     app.selectColumn(input, player)
+    app.isGameEnd(player)
     playerOne = !playerOne
   } catch (e) {
     console.error('\x1b[31m', `*** ${e}... Please try again. ***`, '\x1b[0m')
   }
 }
+
+console.log(`Player ${app.winner} wins!`)

@@ -56,6 +56,23 @@ describe('Connect4', () => {
     ]
 
     connect4.selectColumn(4, 1)
+    connect4.isGameEnd(1)
+    expect(connect4.inProgress).toEqual(false)
+  })
+
+  test('horizontal win, player 2', () => {
+    const connect4 = new Connect4()
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      ['O', 'O', 'O', ' ', ' ', ' ']
+    ]
+
+    connect4.selectColumn(4, 2)
+    connect4.isGameEnd(2)
     expect(connect4.inProgress).toEqual(false)
   })
 
@@ -71,6 +88,7 @@ describe('Connect4', () => {
     ]
 
     connect4.selectColumn(5, 1)
+    connect4.isGameEnd(1)
     expect(connect4.inProgress).toEqual(false)
   })
 
@@ -86,6 +104,7 @@ describe('Connect4', () => {
     ]
 
     connect4.selectColumn(6, 1)
+    connect4.isGameEnd(1)
     expect(connect4.inProgress).toEqual(true)
   })
 
@@ -95,12 +114,13 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' ']
+      ['X', ' ', ' ', ' ', ' ', ' '],
+      ['X', ' ', ' ', ' ', ' ', ' '],
+      ['X', ' ', ' ', ' ', ' ', ' ']
     ]
 
-    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 1)
+    connect4.isGameEnd(1)
     expect(connect4.inProgress).toEqual(false)
   })
 
@@ -109,13 +129,30 @@ describe('Connect4', () => {
     connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
       ['X', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' ']
+      ['X', ' ', ' ', ' ', ' ', ' '],
+      ['X', ' ', ' ', ' ', ' ', ' ']
     ]
 
-    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 1)
+    connect4.isGameEnd(1)
     expect(connect4.inProgress).toEqual(true)
+  })
+
+  test('diagonal win', () => {
+    const connect4 = new Connect4()
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', 'X', ' ', ' '],
+      [' ', ' ', 'X', ' ', ' ', ' '],
+      [' ', 'X', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' ']
+    ]
+
+    connect4.selectColumn(1, 1)
+    connect4.isGameEnd(1)
+    expect(connect4.inProgress).toEqual(false)
   })
 })

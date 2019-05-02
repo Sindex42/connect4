@@ -1,6 +1,7 @@
 class ConnectFour {
   constructor () {
     this.inProgress = true
+    this.winner = 0
     this.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -11,16 +12,12 @@ class ConnectFour {
     ]
     this.boardLength = this.board[0].length
     this.boardHeight = this.board.length
+    this.counter = 0
 
     this.tokens = {
       1: 'X',
       2: 'O'
     }
-  }
-
-  endGame (player) {
-    console.log(`Player ${player} wins!`)
-    this.inProgress = false
   }
 
   selectColumn (columnNumber, player) {
@@ -30,39 +27,40 @@ class ConnectFour {
         break
       }
     }
-    this.checkHorizontalWin(columnNumber, player)
-    this.checkVerticalWin(columnNumber, player)
   }
 
-  checkHorizontalWin (columnNumber, player) {
-    let counter = 0
-    for (let row = 0; row < this.boardHeight; row++) {
-      for (let column = 0; column < this.boardLength; column++) {
-        if (this.board[row][column] === this.tokens[player]) {
-          counter += 1
-          if (counter === 4) {
-            this.endGame(player)
-          }
-        } else {
-          counter = 0
-        }
-      }
+  isGameEnd (player) {
+    if (this.checkHorizontalWin(player) || this.checkVerticalWin(player)) {
+      this.winner = player
+      this.inProgress = false
     }
   }
 
-  checkVerticalWin (columnNumber, player) {
-    let counter = 0
+  checkHorizontalWin (player) {
+    for (let row = 0; row < this.boardHeight; row++) {
+      for (let column = 0; column < this.boardLength; column++) {
+        this.countTokens(row, column, player)
+        if (this.counter === 4) { return true }
+      }
+    }
+    return false
+  }
+
+  checkVerticalWin (player) {
     for (let column = 0; column < this.boardLength; column++) {
       for (let row = 0; row < this.boardHeight; row++) {
-        if (this.board[row][column] === this.tokens[player]) {
-          counter += 1
-          if (counter === 4) {
-            this.endGame(player)
-          }
-        } else {
-          counter = 0
-        }
+        this.countTokens(row, column, player)
+        if (this.counter === 4) { return true }
       }
+    }
+    return false
+  }
+
+  countTokens (row, column, player) {
+    if (this.board[row][column] === this.tokens[player]) {
+      this.counter += 1
+    } else {
+      this.counter = 0
     }
   }
 }
