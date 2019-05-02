@@ -46,97 +46,76 @@ describe('Connect4', () => {
 
   test('game is won if 4 of the same tokens are connected horizontally', () => {
     const connect4 = new Connect4()
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      ['X', 'X', 'X', ' ', ' ', ' ']
+    ]
 
-    connect4.selectColumn(1, 1)
-    connect4.selectColumn(2, 1)
-    connect4.selectColumn(3, 1)
     connect4.selectColumn(4, 1)
-
-    expect(connect4.board).toEqual([
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      ['X', 'X', 'X', 'X', ' ', ' ']
-    ])
     expect(connect4.inProgress).toEqual(false)
   })
 
   test('horizontal win, one over', () => {
     const connect4 = new Connect4()
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', 'X', 'X', 'X', ' ', ' ']
+    ]
 
-    connect4.selectColumn(2, 1)
-    connect4.selectColumn(3, 1)
-    connect4.selectColumn(4, 1)
     connect4.selectColumn(5, 1)
-
-    expect(connect4.board).toEqual([
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', 'X', 'X', 'X', 'X', ' ']
-    ])
     expect(connect4.inProgress).toEqual(false)
   })
 
   test('no horizontal win, gap in the row', () => {
     const connect4 = new Connect4()
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', 'X', ' ', 'X', 'X', ' ']
+    ]
 
-    connect4.selectColumn(2, 1)
-    connect4.selectColumn(4, 1)
-    connect4.selectColumn(5, 1)
     connect4.selectColumn(6, 1)
-
-    expect(connect4.board).toEqual([
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', 'X', ' ', 'X', 'X', 'X']
-    ])
     expect(connect4.inProgress).toEqual(true)
   })
 
   test('vertical win', () => {
     const connect4 = new Connect4()
-
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 2)
-
-    expect(connect4.board).toEqual([
+    connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' ']
-    ])
+    ]
+
+    connect4.selectColumn(1, 2)
     expect(connect4.inProgress).toEqual(false)
   })
 
   test('no vertical win, gap in column', () => {
     const connect4 = new Connect4()
-
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 2)
-    connect4.selectColumn(1, 1)
-    connect4.selectColumn(1, 2)
-
-    expect(connect4.board).toEqual([
+    connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
-      ['O', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
       ['X', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' '],
       ['O', ' ', ' ', ' ', ' ', ' ']
-    ])
+    ]
+
+    connect4.selectColumn(1, 2)
     expect(connect4.inProgress).toEqual(true)
   })
 })

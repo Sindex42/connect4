@@ -18,9 +18,8 @@ class ConnectFour {
     }
   }
 
-  declareWinner (player) {
+  endGame (player) {
     console.log(`Player ${player} wins!`)
-
     this.inProgress = false
   }
 
@@ -42,7 +41,7 @@ class ConnectFour {
         if (this.board[row][column] === this.tokens[player]) {
           counter += 1
           if (counter === 4) {
-            this.declareWinner(player)
+            this.endGame(player)
           }
         } else {
           counter = 0
@@ -58,7 +57,7 @@ class ConnectFour {
         if (this.board[row][column] === this.tokens[player]) {
           counter += 1
           if (counter === 4) {
-            this.declareWinner(player)
+            this.endGame(player)
           }
         } else {
           counter = 0
