@@ -29,7 +29,7 @@ describe('Connect4', () => {
     ])
   })
 
-  test('puts a player token into a column', () => {
+  test('puts the next player token into a row above in the same column', () => {
     const connect4 = new Connect4()
 
     connect4.selectColumn(1, 1)
@@ -60,7 +60,7 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       ['X', 'X', 'X', 'X', ' ', ' ']
     ])
-    expect(connect4.winState).toEqual(true)
+    expect(connect4.inProgress).toEqual(false)
   })
 
   test('horizontal win, one over', () => {
@@ -79,7 +79,7 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', 'X', 'X', 'X', 'X', ' ']
     ])
-    expect(connect4.winState).toEqual(true)
+    expect(connect4.inProgress).toEqual(false)
   })
 
   test('no horizontal win, gap in the row', () => {
@@ -98,6 +98,6 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', 'X', ' ', 'X', 'X', 'X']
     ])
-    expect(connect4.winState).toEqual(false)
+    expect(connect4.inProgress).toEqual(true)
   })
 })

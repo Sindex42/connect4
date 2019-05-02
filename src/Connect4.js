@@ -1,7 +1,6 @@
 class ConnectFour {
   constructor () {
     this.inProgress = true
-    this.winState = false
     this.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -19,6 +18,12 @@ class ConnectFour {
     }
   }
 
+  declareWinner (player) {
+    console.log(`Player ${player} wins!`)
+
+    this.inProgress = false
+  }
+
   selectColumn (columnNumber, player) {
     for (let i = this.boardHeight - 1; i >= 0; i--) {
       if (this.board[i][columnNumber - 1] === ' ') {
@@ -30,13 +35,13 @@ class ConnectFour {
   }
 
   checkHorizontalWin (columnNumber, player) {
+    let counter = 0
     for (let row = 0; row < this.boardHeight; row++) {
-      let counter = 0
       for (let column = 0; column < this.boardLength; column++) {
         if (this.board[row][column] === this.tokens[player]) {
           counter += 1
           if (counter === 4) {
-            this.winState = true
+            this.declareWinner(player)
           }
         } else {
           counter = 0
