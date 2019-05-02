@@ -119,4 +119,24 @@ describe('Connect4', () => {
     ])
     expect(connect4.inProgress).toEqual(false)
   })
+
+  test('no vertical win, gap in column', () => {
+    const connect4 = new Connect4()
+
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 1)
+    connect4.selectColumn(1, 2)
+
+    expect(connect4.board).toEqual([
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['X', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' ']
+    ])
+    expect(connect4.inProgress).toEqual(true)
+  })
 })
