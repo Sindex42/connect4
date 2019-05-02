@@ -32,12 +32,29 @@ class ConnectFour {
       }
     }
     this.checkHorizontalWin(columnNumber, player)
+    this.checkVerticalWin(columnNumber, player)
   }
 
   checkHorizontalWin (columnNumber, player) {
     let counter = 0
     for (let row = 0; row < this.boardHeight; row++) {
       for (let column = 0; column < this.boardLength; column++) {
+        if (this.board[row][column] === this.tokens[player]) {
+          counter += 1
+          if (counter === 4) {
+            this.declareWinner(player)
+          }
+        } else {
+          counter = 0
+        }
+      }
+    }
+  }
+
+  checkVerticalWin (columnNumber, player) {
+    let counter = 0
+    for (let column = 0; column < this.boardLength; column++) {
+      for (let row = 0; row < this.boardHeight; row++) {
         if (this.board[row][column] === this.tokens[player]) {
           counter += 1
           if (counter === 4) {

@@ -100,4 +100,23 @@ describe('Connect4', () => {
     ])
     expect(connect4.inProgress).toEqual(true)
   })
+
+  test('vertical win', () => {
+    const connect4 = new Connect4()
+
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 2)
+    connect4.selectColumn(1, 2)
+
+    expect(connect4.board).toEqual([
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' '],
+      ['O', ' ', ' ', ' ', ' ', ' ']
+    ])
+    expect(connect4.inProgress).toEqual(false)
+  })
 })
