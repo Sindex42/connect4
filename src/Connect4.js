@@ -33,7 +33,8 @@ class ConnectFour {
     if (
       this.checkHorizontalWin(player) ||
       this.checkVerticalWin(player) ||
-      this.checkAscendingDiagonalWin(player)
+      this.checkAscendingDiagonalWin(player) ||
+      this.checkDescendingDiagonalWin(player)
     ) {
       this.winner = player
       this.inProgress = false
@@ -68,6 +69,22 @@ class ConnectFour {
           this.board[row - 1][column + 1] === this.tokens[player] &&
           this.board[row - 2][column + 2] === this.tokens[player] &&
           this.board[row - 3][column + 3] === this.tokens[player]
+        ) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  checkDescendingDiagonalWin (player) {
+    for (let row = 0; row < this.boardHeight - 3; row++) {
+      for (let column = 0; column < this.boardLength - 3; column++) {
+        if (
+          this.board[row + 0][column + 0] === this.tokens[player] &&
+          this.board[row + 1][column + 1] === this.tokens[player] &&
+          this.board[row + 2][column + 2] === this.tokens[player] &&
+          this.board[row + 3][column + 3] === this.tokens[player]
         ) {
           return true
         }
