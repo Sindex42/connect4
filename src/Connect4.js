@@ -44,7 +44,7 @@ class ConnectFour {
   checkHorizontalWin (player) {
     for (let row = 0; row < this.boardHeight; row++) {
       for (let column = 0; column < this.boardLength; column++) {
-        this.countTokens(row, column, player)
+        this.updateStreak(row, column, player)
         if (this.counter === 4) { return true }
       }
     }
@@ -54,7 +54,7 @@ class ConnectFour {
   checkVerticalWin (player) {
     for (let column = 0; column < this.boardLength; column++) {
       for (let row = 0; row < this.boardHeight; row++) {
-        this.countTokens(row, column, player)
+        this.updateStreak(row, column, player)
         if (this.counter === 4) { return true }
       }
     }
@@ -65,7 +65,7 @@ class ConnectFour {
     for (let row = 3; row < this.boardHeight; row++) {
       for (let column = 0; column < this.boardLength - 3; column++) {
         for (let counter = 0; counter < 4; counter++) {
-          this.countTokens(row - counter, column + counter, player)
+          this.updateStreak(row - counter, column + counter, player)
           if (this.counter === 4) { return true }
         }
       }
@@ -77,7 +77,7 @@ class ConnectFour {
     for (let row = 0; row < this.boardHeight - 3; row++) {
       for (let column = 0; column < this.boardLength - 3; column++) {
         for (let counter = 0; counter < 4; counter++) {
-          this.countTokens(row + counter, column + counter, player)
+          this.updateStreak(row + counter, column + counter, player)
           if (this.counter === 4) { return true }
         }
       }
@@ -85,7 +85,7 @@ class ConnectFour {
     return false
   }
 
-  countTokens (row, column, player) {
+  updateStreak (row, column, player) {
     if (this.board[row][column] === this.tokens[player]) {
       this.counter += 1
     } else {
